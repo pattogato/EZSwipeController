@@ -255,7 +255,6 @@ open class EZSwipeController: UIViewController {
     }
     
     public func moveToPage(_ index: Int, animated: Bool) {
-        guard !animating else { return }
         let currentIndex = stackPageVC.index(of: currentStackVC)!
         
         var direction: UIPageViewControllerNavigationDirection = .reverse
@@ -267,9 +266,7 @@ open class EZSwipeController: UIViewController {
         datasource?.changedToPageIndex?(index)
         currentStackVC = stackPageVC[index]
         
-        animating = true
         pageViewController.setViewControllers([currentStackVC], direction: direction, animated: animated) { (_) in
-            self.animating = false
         }
     }
 }
